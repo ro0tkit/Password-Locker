@@ -11,14 +11,14 @@ def generate_password(size=8, char=string.ascii_uppercase+string.ascii_lowercase
 		gen_pass=''.join(random.choice(char) for _ in range(size))
 		return gen_pass
 
-
 while True:
-    print("Welcome, please SignUp by providing the Username and Password\n")
+    print('Hello! Welcome to Password Locker.')
+    print("SignUp by providing the Username and Password\n")
     uname = input("username: \n")
     pwd = ""
-    print("Do you want the system to generate a password for you? Y/N \n")
-    ans = input().lower()
-    if(ans == "y"):
+    print("Generate a password for you? Y/N \n")
+    answ = input().lower()
+    if(answ == "y"):
         print("you can choose the size of the password you want by entering the number of characters \n")
         pchar = input("do you what to choose characters? Y/N: ").lower()
         if(pchar == "y"):
@@ -30,13 +30,13 @@ while True:
         print(pwd)
     else:
         pwd = input("password: \n")
-    nuser = User(uname, pwd)
+    newuser = User(uname, pwd)
     
     print("\n")
     
     logIn = input("Enter your Password to logIn into the System: \n")
-    if(logIn == nuser.user_holder[1]):
-        print(f"Welcome {nuser.user_holder[0]} you are in what do you want to do(use short code)?")
+    if(logIn == newuser.user_holder[1]):
+        print(f"Welcome {newuser.user_holder[0]} you are in what do you want to do(use short code)?")
         while True:
                 print("Use these short codes : cc - create new credential account, dc - display credentials, fc - find credential, del - to delete credential ex -exit the user list ")
 
@@ -59,7 +59,7 @@ while True:
                     
                     
                 elif(short_code == "del"):
-                    print("Warning by contuning you will delete a credential informations,")
+                    print("Warning! by contuning you will delete a credential informations,")
                     res = input("are you sure you want to processed? : Y/N ").lower()
                     if(res == "y"):
                         Credential.delete_credentials(Credential.credential_holder)
@@ -68,13 +68,13 @@ while True:
                         pass
                 elif(short_code == "dc"):
                     userAccountsInfo = dict()
-                    userAccountsInfo.update([(f"{nuser.user_holder[1]}",f"{Credential.credential_holder}")])
+                    userAccountsInfo.update([(f"{newuser.user_holder[1]}",f"{Credential.credential_holder}")])
                     print(userAccountsInfo)
                     # Credential
                 elif(short_code == "fc"):
                     print("Enter the site name to copy to clipboard: \n")
-                    sname = input()
-                    rsult = Credential.find_by_site_name(sname)
+                    sitename = input()
+                    rsult = Credential.find_by_site_name(sitename)
                     Credential.copy_credential(rsult)
 
         
